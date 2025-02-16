@@ -89,8 +89,28 @@ echo "🔹 Configuring templates directory in settings.py..."
 echo ""
 sed -i "s/'DIRS': \[\],/'DIRS': [os.path.join(BASE_DIR, 'templates')],/" $SETTINGS_FILE
 
-# Create project-wide templates directory
-mkdir -p templates
+
+echo ""
+echo "🔹 Setting up templates and static files..."
+echo ""
+
+# Create templates directory inside the app
+mkdir -p $APP_NAME/templates/$APP_NAME
+
+# Create static directory inside the app
+mkdir -p $APP_NAME/static/$APP_NAME/css
+mkdir -p $APP_NAME/static/$APP_NAME/js
+mkdir -p $APP_NAME/static/$APP_NAME/images
+
+# Create base.html in templates
+echo "{% block content %}{% endblock %}" > $APP_NAME/templates/$APP_NAME/base.html
+
+# Correctly inserting 'DIRS' into TEMPLATES setting
+sed -i "/'BACKEND': 'django.template.backends.django.DjangoTemplates',/a \ \ \ \ \ \ \ \ 'DIRS': [os.path.join(BASE_DIR, 'templates')]," $SETTINGS_FILE
+
+# Add static files configuration
+sed -i "/STATIC_URL = 'static\/'/a STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]" $SETTINGS_FILE
+
 
 echo ""
 echo "🔹 Creating superuser..."
@@ -99,7 +119,6 @@ python manage.py createsuperuser
 
 echo ""
 echo "✅ Django project setup completed successfully!"
-echo ""
 echo "🚀 Start the development server with:"
 echo "cd $PROJECT_NAME && source ../env/bin/activate && python manage.py runserver"
 echo ""
