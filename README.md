@@ -20,13 +20,13 @@ This repository contains a **Django project setup script** (`setup_django.sh`) t
 ### 1️⃣ **Clone the Repository**
 ```bash
 git clone https://github.com/your-username/your-repository.git
-cd your-repository'''
+cd your-repository
 
 ## Make the Setup Script Executable
 '''bash
 chmod +x setup_django.sh
 ./setup_django.sh project_name app_name
-'''
+
 
 ## 📂 Project Structure
 
