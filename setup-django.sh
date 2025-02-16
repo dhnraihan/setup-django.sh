@@ -11,9 +11,6 @@ if [ -z "$1" ] || [ -z "$2" ]; then
     exit 1
 fi
 
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-
 # Set project and app names
 PROJECT_NAME=$1
 APP_NAME=$2
